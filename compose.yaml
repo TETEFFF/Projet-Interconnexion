@@ -1,0 +1,66 @@
+services:
+  r_interco_1:
+    build:
+      context: ./r_interco_1
+    networks:
+      Res_Coeur:
+        ipv4_address: 120.0.160.4
+     
+
+  r_interco_2:
+    build:
+      context: ./r_interco_2
+    networks:
+      Res_Coeur:
+        ipv4_address: 120.0.160.3
+     
+
+#  r_entreprise:
+#    build:
+#      context: ./r_entreprise
+#    networks:
+#      Res_Coeur:
+#        ipv4_address: 120.0.160.2
+#      Res_Entreprise_Prim:
+#        ipv4_address: 120.0.168.1
+  
+#  r_clients:
+#    build:
+#      context: ./r_clients
+#    networks:
+#      Res_Coeur:
+#        ipv4_address: 120.0.160.5
+#      Res_Clients:
+#        ipv4_address: 120.0.172.2
+
+#  box:
+#    build:
+#      context: ./box
+#    networks:
+#      Res_Coeur:
+#        ipv4_address: 120.0.160.5
+#      Res_Clients:
+#        ipv4_address: 120.0.172.2
+
+networks:
+  Res_Coeur:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 120.0.160.0/21
+#  Res_Entreprise_Prim:
+#    driver: bridge
+#    ipam:
+#      config:
+#        - subnet: 120.0.168.0/22
+#  Res_Clients:
+#    driver: bridge
+#    ipam:
+#      config:
+#        - subnet: 120.0.172.0/22
+#  Res_Particulier:
+#    driver: bridge
+#    ipam:
+#      config:
+#        - subnet: 192.168.0.0/24
+  

@@ -8,19 +8,13 @@ RUN apk add --no-cache iproute2 iptables quagga
 # Enable IP forwarding
 RUN echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 
-# Add a build argument for the script name
-ARG SCRIPT_NAME
-
 # Copy the script into the container
-COPY scripts/${SCRIPT_NAME} /usr/local/bin/
-
-# Rename the script to start-router.sh script
-RUN mv /usr/local/bin/${SCRIPT_NAME} /usr/local/bin/start-router.sh
+COPY config.sh /usr/local/bin/
 
 # Make the script executable
-RUN chmod +x /usr/local/bin/start-router.sh
+RUN chmod +x /usr/local/bin/config.sh
 
 # Set the script as the entry point
-ENTRYPOINT ["/usr/local/bin/start-router.sh"]
+ENTRYPOINT ["/usr/local/bin/config"]
 
 

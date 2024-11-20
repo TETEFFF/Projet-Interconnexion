@@ -24,6 +24,6 @@ docker network connect Res_Coeur R_Entreprise
 # docker network connect Res_Coeur R_Clients
 #docker network connect Res_Entreprise_Prim R_Entreprise
 # docker network connect Res_Acces_Clients R_clients
-# docker network connect Res_Clients Box
+# docker network connect Res_Acces_Clients Box
 # docker network connect Res_Particulier Box
 
