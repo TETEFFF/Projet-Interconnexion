@@ -15,6 +15,6 @@ COPY config.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/config.sh
 
 # Set the script as the entry point
-ENTRYPOINT ["/usr/local/bin/config"]
+ENTRYPOINT ["/usr/local/bin/config.sh"]
 
 

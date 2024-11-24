@@ -1,3 +1,5 @@
 # Comment ça marche
-Pour faire tourner les conteneurs il suffit d'executer ./start.sh
-Pour tout netoyer il suffit d'executer ./finish.sh
+
+docker-compose run // pour démarrer /n
+docker-compose down // pour arreter /n
+docker compose restart // pour redémarrer
