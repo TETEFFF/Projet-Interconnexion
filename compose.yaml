@@ -7,6 +7,8 @@ services:
     networks:
       Res_Coeur:
         ipv4_address: 120.0.160.3
+    dns:
+      - 120.0.168.5 ##Pour tester on met dns entreprise mais c'est le dns DMZ qui doit être mis je penses
      
 
   r_dmz:
@@ -19,6 +21,8 @@ services:
         ipv4_address: 120.0.160.4
       Res_DMZ:
         ipv4_address: 120.0.174.4
+    dns:
+      - 120.0.168.5 ##Ici dns DMZ
      
 
   r_entreprise_prim:
@@ -31,6 +35,8 @@ services:
         ipv4_address: 120.0.160.2
       Res_Entreprise_Prim_Public:
         ipv4_address: 120.0.168.2
+    dns:
+      - 120.0.168.5 ##Ici dns entreprise
 
   r_entreprise_secon:
     build:
@@ -40,6 +46,8 @@ services:
     networks:
       Res_Coeur:
         ipv4_address: 120.0.160.6
+    dns:
+      - 120.0.168.5 ##Ici dns DMZ
       
   
   r_clients:
@@ -52,6 +60,8 @@ services:
         ipv4_address: 120.0.160.5
       Res_Clients:
         ipv4_address: 120.0.172.2
+    dns:
+      - 120.0.168.5 ##Ici dns DMZ
         
   box:
     build:
@@ -63,6 +73,34 @@ services:
         ipv4_address: 192.168.0.5
       Res_Clients:
         ipv4_address: 120.0.172.3
+    dns:
+      - 120.0.168.5 ##Ici dns DMZ
+
+  serveurdns:
+    build:
+      context: ./ServeurDNS  
+    cap_add:
+      - NET_ADMIN  
+    networks:
+      Res_Entreprise_Prim_Public:
+        ipv4_address: 120.0.168.5  
+    volumes:
+      - ./ServeurDNS/named.conf:/etc/bind/named.conf
+      - ./ServeurDNS/db.groupe10.com:/etc/bind/db.groupe10.com
+
+  serveurweb:
+    build:
+      context: ./ServeurWEB 
+    networks:
+      Res_Entreprise_Prim_Public:
+        ipv4_address: 120.0.168.4
+    ports:
+      - "80:80"  
+    volumes:
+      - ./ServeurWEB/index.html:/var/www/html/index.html  
+
+
+
 
 networks:
   Res_Coeur:
