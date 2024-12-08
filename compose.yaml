@@ -86,11 +86,13 @@ services:
         ipv4_address: 120.0.168.5  
     volumes:
       - ./ServeurDNS/named.conf:/etc/bind/named.conf
-      - ./ServeurDNS/db.groupe10.com:/etc/bind/db.groupe10.com
+      - ./ServeurDNS/db.entreprise10.com:/etc/bind/db.entreprise10.com
 
   serveurweb:
     build:
       context: ./ServeurWEB 
+    cap_add:
+      - NET_ADMIN
     networks:
       Res_Entreprise_Prim_Public:
         ipv4_address: 120.0.168.4
@@ -118,6 +120,7 @@ networks:
     ipam:
       config:
         - subnet: 120.0.168.0/22
+          gateway: 120.0.168.2
   Res_Clients:
     driver: bridge
     ipam:

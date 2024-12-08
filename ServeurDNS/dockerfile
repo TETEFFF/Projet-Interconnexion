@@ -5,10 +5,9 @@ FROM ubuntu/bind9:latest
 
 
 # Copier les fichiers de configuration dans le conteneur
-# COPY named.conf /etc/bind9/
-# COPY db.groupe10.com /etc/bind9/
 COPY dns.sh /home/dns.sh
 
+RUN chmod +x /home/dns.sh
 # Exposer le port 53 pour DNS
 EXPOSE 53/udp
 

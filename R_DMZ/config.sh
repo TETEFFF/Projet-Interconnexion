@@ -1,12 +1,12 @@
 #!/bin/sh
 
 # Assign IP addresses to interfaces
-ip addr add 120.0.160.4/21 dev eth1
-ip addr add 120.0.174.4/24 dev eth2
+#ip addr add 120.0.160.4/21 dev eth1
+#ip addr add 120.0.174.4/24 dev eth2
 
 # Bring interfaces up
-ip link set eth1 up
-ip link set eth2 up
+#ip link set eth1 up
+#ip link set eth2 up
 
 # Add IP routes
 ip route add 120.0.168.0/22 via 120.0.160.2 # entreprise
