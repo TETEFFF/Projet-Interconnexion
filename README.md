@@ -19,7 +19,10 @@
 **Verifying Network Configuration**
 
 Inside containers 
+
 `ip addr`
+
 `ip route` // routing tables
+
 `ping -c 3 <destination-ip>` // Test conectivity
 

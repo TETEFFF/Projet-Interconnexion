@@ -95,7 +95,7 @@ services:
       Res_Entreprise_Prim_Public:
         ipv4_address: 120.0.168.4
     ports:
-      - "80:80"  
+      - "8010:8010"  
     volumes:
       - ./ServeurWEB/index.html:/var/www/html/index.html  
 
