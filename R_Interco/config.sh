@@ -5,6 +5,7 @@
 # ip addr add 192.168.4.1/24 dev eth2
 
 # Bring interfaces up
+# ip link set eth1 up
 #ip link set eth1 up
 # ip link set eth2 up
 
