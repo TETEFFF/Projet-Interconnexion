@@ -6,7 +6,7 @@ services:
       - NET_ADMIN
     networks:
       Res_Domicile:
-        ipv4_address: 192.168.2.1
+        ipv4_address: 192.168.2.2
       Res_Clients:
         ipv4_address: 120.0.172.3
 
@@ -17,11 +17,11 @@ services:
       - NET_ADMIN
     networks:
       Res_Domicile:
-        ipv4_address: 192.168.2.2
+        ipv4_address: 192.168.2.3
 
-  r_entreprise_secon:
+  box_sitesec:
     build:
-      context: ./R_Entreprise_Secon
+      context: ./Box_Sitesec
     cap_add:
       - NET_ADMIN
     networks:
