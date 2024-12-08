@@ -19,9 +19,9 @@ services:
       Res_Domicile:
         ipv4_address: 192.168.2.3
 
-  box_sitesec:
+  box_sitesecon:
     build:
-      context: ./Box_Sitesec
+      context: ./Box_Sitesecon
     cap_add:
       - NET_ADMIN
     networks:
