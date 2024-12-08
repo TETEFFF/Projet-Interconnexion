@@ -1,0 +1,56 @@
+services:
+  r_dom:
+    build:
+      context: ./R_Dom
+    cap_add:
+      - NET_ADMIN
+    networks:
+      Res_Domicile:
+        ipv4_address: 192.168.2.1
+      Res_Clients:
+        ipv4_address: 120.0.172.3
+
+  client:
+    build:
+      context: ./Client
+    cap_add:
+      - NET_ADMIN
+    networks:
+      Res_Domicile:
+        ipv4_address: 192.168.2.2
+
+  r_entreprise_secon:
+    build:
+      context: ./R_Entreprise_Secon
+    cap_add:
+      - NET_ADMIN
+    networks:
+      Res_Entreprise_Secon_Prive:
+        ipv4_address:  192.168.1.9
+
+  u_secon:
+    build:
+      context: ./U_Secon
+    cap_add:
+      - NET_ADMIN
+    networks:
+      Res_Entreprise_Secon_Prive:
+        ipv4_address: 192.168.1.8
+
+networks:
+  Res_Entreprise_Secon_Prive:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+    
+  Res_Domicile:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.2.0/24
+  Res_Clients:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 120.0.172.0/23    
