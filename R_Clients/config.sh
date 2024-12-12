@@ -15,7 +15,7 @@ ip route add 120.0.174.0/24 via 120.0.160.4 # DMZ
 ip route add 120.0.176.0/20 via 120.0.160.3 # AS11
 ip route add 120.0.144.0/20 via 120.0.160.3 # AS9
 
-ip route add 192.168.1.0/24 via 120.0.172.3  # Box
+# ip route add 192.168.1.0/24 via 120.0.172.3  
 
 
 # Keep the container running

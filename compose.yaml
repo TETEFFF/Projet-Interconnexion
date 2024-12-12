@@ -32,9 +32,9 @@ services:
       - NET_ADMIN
     networks:
       Res_Coeur:
-        ipv4_address: 120.0.160.2
+        ipv4_address: 120.0.160.20
       Res_Entreprise_Prim_Public:
-        ipv4_address: 120.0.168.2
+        ipv4_address: 120.0.168.20
     dns:
       - 120.0.168.5 ##Ici dns entreprise
 
@@ -63,18 +63,7 @@ services:
     dns:
       - 120.0.168.5 ##Ici dns DMZ
         
-  box:
-    build:
-      context: ./Box
-    cap_add:
-      - NET_ADMIN
-    networks:
-      Res_Particulier:
-        ipv4_address: 192.168.0.5
-      Res_Clients:
-        ipv4_address: 120.0.172.3
-    dns:
-      - 120.0.168.5 ##Ici dns DMZ
+
 
   serveurdns:
     build:
@@ -97,11 +86,47 @@ services:
       Res_Entreprise_Prim_Public:
         ipv4_address: 120.0.168.4
     ports:
-      - "8010:8010"  
+      - "8000:8010"  
     volumes:
       - ./ServeurWEB/index.html:/var/www/html/index.html  
 
+  r_dom:
+    build:
+      context: ./R_Dom
+    cap_add:
+      - NET_ADMIN
+    networks:
+      Res_Domicile:
+        ipv4_address: 192.168.2.2
+      Res_Clients:
+        ipv4_address: 120.0.172.3
 
+  client:
+    build:
+      context: ./Client
+    cap_add:
+      - NET_ADMIN
+    networks:
+      Res_Domicile:
+        ipv4_address: 192.168.2.30
+
+  box_sitesecon:
+    build:
+      context: ./Box_Sitesecon
+    cap_add:
+      - NET_ADMIN
+    networks:
+      Res_Entreprise_Secon_Prive:
+        ipv4_address:  192.168.1.9
+
+  u_secon:
+    build:
+      context: ./U_Secon
+    cap_add:
+      - NET_ADMIN
+    networks:
+      Res_Entreprise_Secon_Prive:
+        ipv4_address: 192.168.1.80
 
 
 networks:
@@ -140,6 +165,12 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 192.168.3.0/24
+        - subnet: 192.168.1.0/24
     
-    
+  Res_Domicile:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.2.0/24
+
+
