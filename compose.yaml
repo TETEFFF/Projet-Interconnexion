@@ -130,7 +130,7 @@ services:
 
   utilisateur_entreprise:
     build:
-      context: ./Utilisateur_Entreprise
+      context: ./Utilisateur_entreprise
     cap_add:
       - NET_ADMIN
     networks:
