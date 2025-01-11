@@ -32,9 +32,9 @@ services:
       - NET_ADMIN
     networks:
       Res_Coeur:
-        ipv4_address: 120.0.160.20
+        ipv4_address: 120.0.160.2
       Res_Entreprise_Prim_Public:
-        ipv4_address: 120.0.168.20
+        ipv4_address: 120.0.168.2
     dns:
       - 120.0.168.5 ##Ici dns entreprise
 
@@ -61,7 +61,7 @@ services:
       Res_Clients:
         ipv4_address: 120.0.172.2
     dns:
-      - 120.0.168.5 ##Ici dns DMZ
+      - 120.0.168.5 
         
 
 
@@ -89,7 +89,14 @@ services:
       - "8000:8010"  
     volumes:
       - ./ServeurWEB/index.html:/var/www/html/index.html  
-
+  serveurdhcp:
+    build:
+      context: ./ServeurDHCP
+    cap_add:
+      - NET_ADMIN
+    networks:
+      Res_Entreprise_Prim_Prive:
+        ipv4_address: 192.168.3.12
   r_dom:
     build:
       context: ./R_Dom
@@ -101,6 +108,17 @@ services:
       Res_Clients:
         ipv4_address: 120.0.172.3
 
+  r_entreprise_priv:
+    build:
+      context: ./R_Entreprise_priv
+    cap_add:
+      - NET_ADMIN
+    networks:
+      Res_Entreprise_Prim_Public:
+        ipv4_address: 120.0.168.3
+      Res_Entreprise_Prim_Prive:
+        ipv4_address: 192.168.3.5
+
   client:
     build:
       context: ./Client
@@ -109,6 +127,15 @@ services:
     networks:
       Res_Domicile:
         ipv4_address: 192.168.2.30
+
+  utilisateur_entreprise:
+    build:
+      context: ./Utilisateur_Entreprise
+    cap_add:
+      - NET_ADMIN
+    networks:
+      Res_Entreprise_Prim_Prive:
+        
 
   box_sitesecon:
     build:
@@ -145,22 +172,18 @@ networks:
     ipam:
       config:
         - subnet: 120.0.168.0/22
-          gateway: 120.0.168.2
+          
   Res_Clients:
     driver: bridge
     ipam:
       config:
         - subnet: 120.0.172.0/23
-  Res_Particulier:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.0.0/23
+
   Res_Entreprise_Prim_Prive:
     driver: bridge
     ipam:
       config:
-        - subnet: 192.168.2.0/24
+        - subnet: 192.168.3.0/24
   Res_Entreprise_Secon_Prive:
     driver: bridge
     ipam:
