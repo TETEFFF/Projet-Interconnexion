@@ -3,7 +3,7 @@
 sleep 2
 
 # Assign IP addresses to interfaces
-ip addr add 192.168.1.80/24 dev eth0
+#ip addr add 192.168.1.80/24 dev eth0
 
 # Bring interfaces up
 ip link set eth0 up

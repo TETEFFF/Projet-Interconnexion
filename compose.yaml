@@ -102,6 +102,7 @@ services:
       context: ./R_Dom
     cap_add:
       - NET_ADMIN
+    privileged: true
     networks:
       Res_Domicile:
         ipv4_address: 192.168.2.2
@@ -113,6 +114,9 @@ services:
       context: ./R_Entreprise_priv
     cap_add:
       - NET_ADMIN
+    privileged: true
+
+    
     networks:
       Res_Entreprise_Prim_Public:
         ipv4_address: 120.0.168.3
@@ -130,7 +134,7 @@ services:
 
   utilisateur_entreprise:
     build:
-      context: ./Utilisateur_Entreprise
+      context: ./Utilisateur_entreprise
     cap_add:
       - NET_ADMIN
     networks:
@@ -153,7 +157,6 @@ services:
       - NET_ADMIN
     networks:
       Res_Entreprise_Secon_Prive:
-        ipv4_address: 192.168.1.80
 
 
 networks:
