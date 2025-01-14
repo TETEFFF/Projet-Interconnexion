@@ -5,6 +5,7 @@ ip route add 120.0.168.0/22 via 120.0.168.3 # Entreprise_Prim
 ip route add 192.168.3.0/24 via 192.168.3.5 # Entreprise_Priv
 ip route add 120.0.160.0/21 via 120.0.168.2 # Reseau coeur
 ip route add 120.0.172.0/23 via 120.0.168.2 # Clients
+ip route add 120.0.174.0/23 via 120.0.168.2 # DMZ
 
 # Assignation des IP aux interfaces
 ip addr add 192.168.3.5/24 dev eth0
