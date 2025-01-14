@@ -3,12 +3,16 @@ services:
     build:
       context: ./R_Interco
     cap_add:
-      - NET_ADMIN  
+      - NET_ADMIN
+    privileged: true
     networks:
       Res_Coeur:
         ipv4_address: 120.0.160.3
     dns:
       - 120.0.168.5 ##Pour tester on met dns entreprise mais c'est le dns DMZ qui doit être mis je penses
+    volumes:
+      - ./R_Interco/config/frr.conf:/etc/frr/frr.conf
+
      
 
   r_dmz:
@@ -16,6 +20,7 @@ services:
       context: ./R_DMZ
     cap_add:
       - NET_ADMIN
+    privileged: true
     networks:
       Res_Coeur:
         ipv4_address: 120.0.160.4
@@ -23,6 +28,9 @@ services:
         ipv4_address: 120.0.174.4
     dns:
       - 120.0.168.5 ##Ici dns DMZ
+    volumes:
+      - ./R_Interco/config/frr.conf:/etc/frr/frr.conf
+
      
 
   r_entreprise_prim:
@@ -30,6 +38,7 @@ services:
       context: ./R_Entreprise_Prim
     cap_add:
       - NET_ADMIN
+    privileged: true
     networks:
       Res_Coeur:
         ipv4_address: 120.0.160.2
@@ -37,17 +46,24 @@ services:
         ipv4_address: 120.0.168.2
     dns:
       - 120.0.168.5 ##Ici dns entreprise
-
+    volumes:
+      - ./R_Interco/config/frr.conf:/etc/frr/frr.conf
+    
+    
   r_entreprise_secon:
     build:
       context: ./R_Entreprise_Secon
     cap_add:
       - NET_ADMIN
+    privileged: true
     networks:
       Res_Coeur:
         ipv4_address: 120.0.160.6
     dns:
       - 120.0.168.5 ##Ici dns DMZ
+    volumes:
+      - ./R_Interco/config/frr.conf:/etc/frr/frr.conf
+
       
   
   r_clients:
@@ -55,6 +71,7 @@ services:
       context: ./R_Clients
     cap_add:
       - NET_ADMIN
+    privileged: true
     networks:
       Res_Coeur:
         ipv4_address: 120.0.160.5
@@ -62,6 +79,9 @@ services:
         ipv4_address: 120.0.172.2
     dns:
       - 120.0.168.5 
+    volumes:
+      - ./R_Interco/config/frr.conf:/etc/frr/frr.conf
+
         
 
 
@@ -70,6 +90,7 @@ services:
       context: ./ServeurDNS  
     cap_add:
       - NET_ADMIN  
+    privileged: true
     networks:
       Res_Entreprise_Prim_Public:
         ipv4_address: 120.0.168.5  
@@ -82,6 +103,7 @@ services:
       context: ./ServeurWEB 
     cap_add:
       - NET_ADMIN
+    privileged: true
     networks:
       Res_Entreprise_Prim_Public:
         ipv4_address: 120.0.168.4
@@ -94,6 +116,7 @@ services:
       context: ./ServeurDHCP
     cap_add:
       - NET_ADMIN
+    privileged: true
     networks:
       Res_Entreprise_Prim_Prive:
         ipv4_address: 192.168.3.12
@@ -115,8 +138,6 @@ services:
     cap_add:
       - NET_ADMIN
     privileged: true
-
-    
     networks:
       Res_Entreprise_Prim_Public:
         ipv4_address: 120.0.168.3
@@ -128,6 +149,7 @@ services:
       context: ./Client
     cap_add:
       - NET_ADMIN
+    privileged: true
     networks:
       Res_Domicile:
         ipv4_address: 192.168.2.30
@@ -137,6 +159,7 @@ services:
       context: ./Utilisateur_entreprise
     cap_add:
       - NET_ADMIN
+    privileged: true
     networks:
       Res_Entreprise_Prim_Prive:
         
@@ -146,6 +169,7 @@ services:
       context: ./Box_Sitesecon
     cap_add:
       - NET_ADMIN
+    privileged: true
     networks:
       Res_Entreprise_Secon_Prive:
         ipv4_address:  192.168.1.9
@@ -155,6 +179,7 @@ services:
       context: ./U_Secon
     cap_add:
       - NET_ADMIN
+    privileged: true
     networks:
       Res_Entreprise_Secon_Prive:
 

@@ -2,7 +2,9 @@ FROM ubuntu/bind9:latest
 
 # Installation de bind9
 # RUN apt-get update && apt-get install -y bind9
-
+RUN apt-get update
+RUN apt-get -y install iptables apt-utils iproute2 net-tools systemd telnet nano iputils-ping tcpdump inetutils-traceroute apache2 tasksel
+RUN apt-get -f install
 
 # Copier les fichiers de configuration dans le conteneur
 COPY dns.sh /home/dns.sh
