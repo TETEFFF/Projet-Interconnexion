@@ -19,9 +19,9 @@ RUN apt-get update && apt-get -y install \
 RUN apt-get -f install
 
 COPY ./start.sh /start.sh
-COPY ./dhcp.conf /etc/dhcp.conf
+COPY ./dhcp.conf /etc/dhcp/dhcpd.conf
 
-
+COPY ./dhcpd.leases /var/lib/dhcp/dhcpd.leases
 
 # Expose the DHCP port
 EXPOSE 67/udp
