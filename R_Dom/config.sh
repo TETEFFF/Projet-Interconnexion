@@ -4,6 +4,8 @@
 ip route add 120.0.172.0/23 via 120.0.172.3 # Réseau clients
 ip route add 192.168.2.0/24 via 192.168.2.2 # Réseau Domicile
 ip route add 120.0.160.0/21 via 120.0.172.2 # Réseau Coeur
+ip route add 120.0.168.0/22 via 120.0.172.2 # Réseau Entreprise
+ip route add 120.0.174.0/24 via 120.0.172.2 # DMZ
 
 
 # Assign IP addresses to interfaces

@@ -4,6 +4,8 @@ FROM alpine:latest
 
 # Install necessary tools
 RUN apk add --no-cache iproute2 iptables quagga 
+# Installer bind-tools pour dig
+RUN apk add --no-cache bind-tools iproute2 iptables quagga wget
 
 # Enable IP forwarding
 RUN echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
@@ -15,6 +17,6 @@ COPY config.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/config.sh
 
 # Set the script as the entry point
-ENTRYPOINT ["/usr/local/bin/config.sh"]
+ENTRYPOINT /usr/local/bin/config.sh
 
 

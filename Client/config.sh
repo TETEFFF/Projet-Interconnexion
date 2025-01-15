@@ -1,13 +1,9 @@
 #!/bin/sh
 
-sleep 2
-
-# Assign IP addresses to interfaces
-ip addr add 192.168.2.30/24 dev eth0
-
-# Bring interfaces up
-ip link set eth0 up
-
+# supprimer route par défaut de docker
+ip route del default via 192.168.2.1
+# route par défaut
+ip route add default via 192.168.2.2
 
 # Keep the container running
 tail -f /dev/null

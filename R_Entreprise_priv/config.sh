@@ -13,7 +13,7 @@ ip link set eth0 up
 ip link set eth1 up
 
 echo 1 > /proc/sys/net/ipv4/ip_forward
-service isc-dhcp-server start
+#service isc-dhcp-server start
 # Activer le NAT (Masquerading)
 iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
 

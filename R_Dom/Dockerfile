@@ -1,3 +1,4 @@
+
 # Use a lightweight Linux image
 FROM alpine:latest
 
@@ -9,6 +10,8 @@ RUN apk add --no-cache bind-tools iproute2 iptables quagga wget
 
 # Enable IP forwarding
 RUN echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+
+
 
 # Copy the script into the container
 COPY config.sh /usr/local/bin/
