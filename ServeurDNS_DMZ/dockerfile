@@ -1,0 +1,13 @@
+FROM ubuntu/bind9:latest
+
+# Copier les fichiers de configuration dans le conteneur
+COPY dns.sh /home/dns.sh
+
+RUN chmod +x /home/dns.sh
+
+RUN chmod +x /home/dns.sh
+# Exposer le port 53 pour DNS
+EXPOSE 53/udp
+
+# Lancer le serveur DNS bind9 en mode premier plan
+ENTRYPOINT /home/dns.sh

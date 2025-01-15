@@ -14,3 +14,8 @@ ns1     IN      A       120.0.168.5
 www      IN      A       120.0.168.4
 
               
+mail    IN      A       120.0.168.10
+
+@       IN      MX 10   mail.entreprise10.com.
+
+@       IN    TXT  "v=spf1 mx -all"

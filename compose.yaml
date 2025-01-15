@@ -9,11 +9,9 @@ services:
       Res_Coeur:
         ipv4_address: 120.0.160.3
     dns:
-      - 120.0.168.5 ##Pour tester on met dns entreprise mais c'est le dns DMZ qui doit être mis je penses
+      - 120.0.174.2 ##Pour tester on met dns entreprise mais c'est le dns DMZ qui doit être mis je penses
     volumes:
       - ./R_Interco/config/frr.conf:/etc/frr/frr.conf
-
-     
 
   r_dmz:
     build:
@@ -27,11 +25,9 @@ services:
       Res_DMZ:
         ipv4_address: 120.0.174.4
     dns:
-      - 120.0.168.5 ##Ici dns DMZ
+      - 120.0.174.2 ##Ici dns DMZ
     volumes:
-      - ./R_Interco/config/frr.conf:/etc/frr/frr.conf
-
-     
+    - ./R_Interco/config/frr.conf:/etc/frr/frr.conf
 
   r_entreprise_prim:
     build:
@@ -60,11 +56,9 @@ services:
       Res_Coeur:
         ipv4_address: 120.0.160.6
     dns:
-      - 120.0.168.5 ##Ici dns DMZ
+      - 120.0.174.2 ##Ici dns DMZ
     volumes:
       - ./R_Interco/config/frr.conf:/etc/frr/frr.conf
-
-      
   
   r_clients:
     build:
@@ -78,12 +72,21 @@ services:
       Res_Clients:
         ipv4_address: 120.0.172.2
     dns:
-      - 120.0.168.5 
+      - 120.0.174.2 
     volumes:
-      - ./R_Interco/config/frr.conf:/etc/frr/frr.conf
+      - ./R_Interco/config/frr.conf:/etc/frr/frr.conf   
 
-        
-
+  serveurdns_dmz: 
+    build:
+      context: ./ServeurDNS_DMZ  
+    cap_add:
+      - NET_ADMIN  
+    networks:
+      Res_DMZ:
+        ipv4_address: 120.0.174.2
+    volumes:
+      - ./ServeurDNS_DMZ/named.conf:/etc/bind/named.conf
+      - ./ServeurDNS_DMZ/db.groupe10.com:/etc/bind/db.groupe10.com
 
   serveurdns:
     build:
@@ -182,6 +185,22 @@ services:
     privileged: true
     networks:
       Res_Entreprise_Secon_Prive:
+
+    
+
+  # mailserver:
+  #   build:
+  #     context: ./ServeurMail
+  #   container_name: mailserver
+  #   ports:
+  #     - "25:25"   # SMTP
+  #     - "143:143" # IMAP
+  #     - "587:587" # Submission
+  #     - "993:993" # IMAPS
+  #   networks:
+  #     Res_Entreprise_Prim_Public:
+  #       ipv4_address: 120.0.168.10
+  #   restart: always
 
 
 networks:
